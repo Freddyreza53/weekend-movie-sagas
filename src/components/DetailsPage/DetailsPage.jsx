@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 function DetailsPage () {
     const movie = useSelector(store => store.clickedMovie)
 
+    console.log(movie);
+
     return (
         <div>
             <h3>{movie.title}</h3>
