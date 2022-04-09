@@ -9,7 +9,12 @@ function DetailsPage () {
 
     return (
         <div>
-            <h3>{movie.title}</h3>
+            <h1>{movie.title}</h1>
+            {movie.genres.map(genre => {
+                return (
+                    <h4>{genre.name}</h4>
+                )
+            })}
             <img onClick={() => handleClick(movie)} src={movie.poster} alt={movie.title}/>
             <p>{movie.description}</p>
         </div>
