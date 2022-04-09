@@ -22,7 +22,7 @@ function* fetchDetails(action) {
     try {
         const genres = yield axios.get(`/api/movie/${action.payload.id}`);
         console.log('get movie detail:', genres.data);
-        action.payload.genres = genres.data;
+        yield action.payload.genres = genres.data;
         yield put({ type: 'SET_MOVIE_DETAILS', payload: action.payload });
 
     } catch {
@@ -66,8 +66,17 @@ const genres = (state = [], action) => {
     }
 }
 
+// this is to eliminate error on reload
+const empty = {
+    id: '',
+    name: '',
+    genres: [],
+    poster: '',
+    title: ''
+}
+
 // Used to store selected movie
-const clickedMovie = (state = {}, action) => {
+const clickedMovie = (state = empty, action) => {
     switch (action.type) {
         case 'SET_MOVIE_DETAILS':
             return action.payload;
