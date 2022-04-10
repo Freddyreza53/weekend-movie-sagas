@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Component } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css'
 import { useHistory } from 'react-router-dom';
@@ -6,16 +6,16 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+// import for carousel effect
+import Carousel from 'react-elastic-carousel';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 165,
-
+        width: 300,
+        height: 550,
     },
 });
 
@@ -41,8 +41,8 @@ function MovieList() {
 
     return (
         <main>
-            <h1>MovieList</h1>
             <section className="movies">
+                <Carousel>
                 {movies.map(movie => {
                     return (
                         <Card className={classes.root} key={movie.id}>
@@ -50,7 +50,8 @@ function MovieList() {
                                 <CardMedia
                                 component="img"
                                 alt={movie.title}
-                                height="250"
+                                // height="400vh"
+                                // width="300vh"
                                 image={movie.poster}
                                 title={movie.title}
                                 onClick={() => handleClick(movie)}
@@ -62,12 +63,9 @@ function MovieList() {
                                 </CardContent>
                             </CardActionArea>
                         </Card> 
-                        // <div key={movie.id} >
-                        //     <h3>{movie.title}</h3>
-                        //     <img onClick={() => handleClick(movie)} src={movie.poster} alt={movie.title}/>
-                        // </div>
                     );
                 })}
+                </Carousel>
             </section>
         </main>
     );
