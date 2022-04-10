@@ -5,5 +5,8 @@
 }
 
 body {
-    background-color: grey;
+    /* background-color: grey; */
+    background-image: url("https://i.fbcd.co/products/original/f3335fcafe627c31c4d99454841f84a774cef6b707f3acbdf56c3dc0dfee74d8.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
 }

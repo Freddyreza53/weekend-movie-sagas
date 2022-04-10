@@ -15,7 +15,6 @@ import Carousel from 'react-elastic-carousel';
 const useStyles = makeStyles({
     root: {
         width: 300,
-        height: 550,
     },
 });
 
@@ -41,28 +40,29 @@ function MovieList() {
 
     return (
         <main>
+            <h1>The Movies Saga!</h1>
             <section className="movies">
-                <Carousel>
+                <Carousel className="carouselDiv">
                 {movies.map(movie => {
                     return (
+                        <div className="cardDiv">
                         <Card className={classes.root} key={movie.id}>
                             <CardActionArea>
                                 <CardMedia
                                 component="img"
                                 alt={movie.title}
-                                // height="400vh"
-                                // width="300vh"
                                 image={movie.poster}
                                 title={movie.title}
                                 onClick={() => handleClick(movie)}
                                 />
-                                <CardContent>
+                                {/* <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {movie.title}
                                 </Typography>
-                                </CardContent>
+                                </CardContent> */}
                             </CardActionArea>
                         </Card> 
+                        </div>
                     );
                 })}
                 </Carousel>
