@@ -8,19 +8,31 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, take } from 'redux-saga/effects';
 import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_DETAILS', fetchDetails);
+    yield takeEvery('FETCH_MOVIE', fetchMovie)
+}
+
+function* fetchMovie(action) {
+    try {
+        const movie = yield axios.get(`/api/movie/reload/${action.payload}`);
+        console.log('get movie detail:', movie.data);
+        yield put({ type: 'FETCH_DETAILS', payload: movie.data[0] });
+
+    } catch {
+        console.log('get all error');
+    }
 }
 
 function* fetchDetails(action) {
     // get details of movie from DB
     try {
-        const genres = yield axios.get(`/api/movie/${action.payload.id}`);
+        const genres = yield axios.get(`/api/movie/genres/${action.payload.id}`);
         console.log('get movie detail:', genres.data);
         yield action.payload.genres = genres.data;
         yield put({ type: 'SET_MOVIE_DETAILS', payload: action.payload });

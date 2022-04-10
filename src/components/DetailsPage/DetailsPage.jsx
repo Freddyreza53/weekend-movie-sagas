@@ -1,5 +1,6 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // imports for styling with Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -7,8 +8,16 @@ import Button from '@material-ui/core/Button';
 function DetailsPage () {
     const movie = useSelector(store => store.clickedMovie)
     const history = useHistory();
+    const dispatch = useDispatch();
     
     const {id} = useParams();
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_MOVIE',
+            payload: id
+        })
+    }, []);
 
     const handleClick = () => {
         history.push('/');
@@ -17,7 +26,6 @@ function DetailsPage () {
     return (
         <div className="movieBackground">
             <h1 className="movieTitle">{movie.title}</h1>
-            <h1>{id}</h1>
             <div className="movieDiv">
                 <img src={movie.poster} alt={movie.title}/>
                 <div className="movieDescription">
