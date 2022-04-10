@@ -32,7 +32,7 @@ function MovieList() {
             type: 'FETCH_DETAILS',
             payload: clickedMovie
         })
-        history.push('/detailsPage');
+        history.push(`/detailsPage/${clickedMovie.id}`);
     }
 
     return (

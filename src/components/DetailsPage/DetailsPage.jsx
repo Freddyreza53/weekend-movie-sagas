@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // imports for styling with Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +8,8 @@ function DetailsPage () {
     const movie = useSelector(store => store.clickedMovie)
     const history = useHistory();
     
+    const {id} = useParams();
+
     const handleClick = () => {
         history.push('/');
     }
@@ -15,6 +17,7 @@ function DetailsPage () {
     return (
         <div className="movieBackground">
             <h1 className="movieTitle">{movie.title}</h1>
+            <h1>{id}</h1>
             <div className="movieDiv">
                 <img src={movie.poster} alt={movie.title}/>
                 <div className="movieDescription">
@@ -24,6 +27,7 @@ function DetailsPage () {
                         )
                     })}
                     <p>{movie.description}</p>
+                    
                 </div>
             </div>
             <Button variant="outlined" className= "backButton" onClick={handleClick}>GO BACK TO MOVIE LIST</Button>
