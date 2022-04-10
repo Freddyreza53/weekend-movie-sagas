@@ -23,10 +23,13 @@ function MovieList() {
     const history = useHistory();
     const movies = useSelector(store => store.movies);
 
+    //on page load, dispatch will get all movies from DB
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    //on click of movie, dispatch will send movie
+    // and get all details for detail page
     const handleClick = (clickedMovie) => {
         dispatch({
             type: 'FETCH_DETAILS',

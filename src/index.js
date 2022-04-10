@@ -18,7 +18,9 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIE', fetchMovie)
 }
 
+
 function* fetchMovie(action) {
+    // gets movie on page reload
     try {
         const movie = yield axios.get(`/api/movie/reload/${action.payload}`);
         console.log('get movie detail:', movie.data);

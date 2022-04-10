@@ -10,8 +10,10 @@ function DetailsPage () {
     const history = useHistory();
     const dispatch = useDispatch();
     
+    //gets id from url path
     const {id} = useParams();
 
+    // on page reload, dispatch will send id
     useEffect(() => {
         dispatch({
             type: 'FETCH_MOVIE',
